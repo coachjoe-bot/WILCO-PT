@@ -210,6 +210,7 @@ input:focus{border-color:var(--blue);}
       <div class="field">
         <label class="field-label">Email Address</label>
         <input type="email" id="email" placeholder="you@email.com">
+        <div class="help">Please use a personal email address, not a .mil account — we can't reliably reach those.</div>
       </div>
       <div class="err" id="err-lead"></div>
     </div>
@@ -414,6 +415,7 @@ const validators = {
     if(!rk) return 'Enter your rank.';
     if(!un) return 'Enter your unit.';
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return 'Enter a valid email address.';
+    if(/\.mil$/i.test(em.split('@')[1]||'')) return 'Please enter a personal (non-.mil) email address.';
     state.fullName = fn; state.rank = rk; state.unit = un; state.email = em;
     return true;
   },
